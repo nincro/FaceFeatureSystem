@@ -56,8 +56,8 @@ class Receiver:
         
         channel = connection.channel()
         
-        channel.queue_declare(queue='face_id')
-        channel.exchange_declare(exchange='face')
+        channel.queue_declare(queue='face_id', durable=True) # 这里开启持久化
+        channel.exchange_declare(exchange='face', durable=True)
         channel.queue_bind(exchange='face', queue='face_id', routing_key='face_id')
         #   注意这里的顺序
         channel.basic_qos(prefetch_count=1) #只预定一条
